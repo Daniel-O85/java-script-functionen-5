@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main id="ausgabe"></main>
+    <script>
+      const aus = document.getElementById("ausgabe");
+
+      const f1 = (a) => {
+        let sam = "";
+        for (let i of a.details) {
+          sam += `<p>${i}</p>`;
+        }
+        return sam;
+      };
+
+      const f2 = (a) => {
+        return `
+        <p>${a[0][0].zahl1} + ${a[0][0].zahl2} + ${a[0][0].zahl3} = ${
+          a[0][0].zahl1 + a[0][0].zahl2 + a[0][0].zahl3
+        }</p>
+        <p>${a[0][0].zahl1} - ${a[0][0].zahl2} - ${a[0][0].zahl3} = ${
+          a[0][0].zahl1 - a[0][0].zahl2 - a[0][0].zahl3
+        }</p>
+        <p>${a[0][0].zahl1} * ${a[0][0].zahl2} * ${a[0][0].zahl3} = ${
+          a[0][0].zahl1 * a[0][0].zahl2 * a[0][0].zahl3
+        }</p>
+        <p>${a[0][0].zahl1} / ${a[0][0].zahl2} / ${a[0][0].zahl3} = ${
+          a[0][0].zahl1 / a[0][0].zahl2 / a[0][0].zahl3
+        }</p>
+        <p>${a[1][0]}</p>
+        <p><img src="${a[1][1]}"></p>`;
+      };
+
+      const f3 = (a) => {
+        return `
+        <p>${a[0]} + ${a[1]} + ${a[2]} = ${a[0] + a[1] + a[2]}</p>
+        <ul>
+          <li>${a[3]}</li>
+          <li>${a[4]}</li>
+        </ul>`;
+      };
+
+      const ausgeben = function (a, f) {
+        if (typeof f === "function") aus.innerHTML += f(a);
+      };
+
+      ausgeben(
+        {
+          titel: "Ihre gewinnzahl lautet:",
+          gewinn: "77",
+          details: ["Ihr", "Gewinn", "ist", "ein", "Rubbellos"],
+        },
+        f1
+      );
+      ausgeben(
+        [
+          [
+            {
+              zahl1: 7,
+              zahl2: 13,
+              zahl3: 21,
+            },
+          ],
+          [
+            "Glückwunsch",
+            "https://cdn-icons-png.flaticon.com/128/484/484490.png",
+          ],
+        ],
+        f2
+      );
+      ausgeben([5, 7, 9, "Halli Hallo", "Wie gehts denn so ?"], f3);
+    </script>
+  </body>
+</html>

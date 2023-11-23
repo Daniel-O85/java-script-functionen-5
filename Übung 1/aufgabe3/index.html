@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main id="ausgabe"></main>
+  </body>
+  <script>
+    const ag = document.getElementById("ausgabe");
+
+    const f1 = (json1) => {
+      let sam = "";
+
+      sam += `<p>${json1.daten.land}</p>
+                <p>${json1.daten.sprache}</p>
+                <p>${json1.daten.hauptstadt}</p><hr>`;
+
+      for (let x of json1.details) {
+        sam += `<p>${x}</p>`;
+      }
+      sam += `<hr><h3>${json1.info.titel}</h3>`;
+      for (let y of json1.info.kontinent) {
+        sam += `<p>${y}</p>`;
+      }
+      return sam;
+    };
+
+    const f2 = (text, liste) => {
+      let sam = `<hr><p>${text}</p><hr>`;
+      sam += `<ol>`;
+      for (let i of liste[0].nahrungsmittel) {
+        sam += `<li>${i}</li>`;
+      }
+      sam += `</ol><hr><ul>`;
+      for (let x of liste[0].name) {
+        sam += `<li>${x}</li>`;
+      }
+      sam += `</ul><hr>`;
+      return sam;
+    };
+
+    const f3 = (zahl, weg) => {
+      let sam = ``;
+      for (let i of weg) {
+        switch (i) {
+          case "+":
+            sam += `<p>${zahl.a} + ${zahl.b} = ${zahl.a + zahl.b}</p>`;
+            break;
+          case "-":
+            sam += `<p>${zahl.a} - ${zahl.b} = ${zahl.a - zahl.b}</p>`;
+            break;
+          case "*":
+            sam += `<p>${zahl.a} * ${zahl.b} = ${zahl.a * zahl.b}</p>`;
+            break;
+          case "/":
+            sam += `<p>${zahl.a} / ${zahl.b} = ${zahl.a / zahl.b}</p>`;
+            break;
+          default:
+            sam += `<p>Berechnung nicht möglich<p>`;
+        }
+      }
+      return sam;
+    };
+
+    function test(t) {
+      if (typeof t.func === "function") {
+        if (t.data.length > 0) ag.innerHTML += t.func(t.data[0], t.data[1]);
+        else ag.innerHTML += t.func(t.data);
+      }
+    }
+
+    test({
+      func: f1,
+      data: {
+        daten: {
+          land: "Deutschland",
+          sprache: "Deutsch",
+          hauptstadt: "Berlin",
+        },
+
+        details: [
+          "Amsterdamm",
+          "Andorra la Vella",
+          "Athen ",
+          "Belgrad",
+          "Berlin",
+          "Bern",
+          "Bratislava",
+          "Brüssel",
+          "Budapest",
+          "Bukarest",
+          "Chișinău",
+          "Città di San Marino",
+          "Dublin",
+          "Helsinki",
+          "Kiew",
+          "Kopenhagen",
+          "Lissabon",
+          "Ljubljana",
+          "London",
+          "Luxemburg",
+          "Madrid",
+          "Minsk",
+          "Monaco",
+          "Moskau",
+          "Nikosia",
+          "Oslo",
+          "Paris",
+          "Podgorica",
+          "Prag",
+          "Pristina",
+          "Reykjavík",
+          "Riga",
+          "Rom",
+          "Sarajevo",
+          "Skopje",
+          "Sofia",
+          "Stockholm",
+          "Tallinn",
+          "Tirana",
+          "Vaduz",
+          "Valletta",
+          "Vatikanstadt",
+          "Vilnius",
+          "Warschau",
+          "Wien",
+          "Zagreb",
+        ],
+        info: {
+          titel: "Kontinente",
+          kontinent: ["Europa", "Asien", "Afrika", "Australien", "Amerika"],
+        },
+      },
+    });
+
+    test({
+      func: f2,
+      data: [
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+        [
+          {
+            nahrungsmittel: [
+              "Gemüse",
+              "Obst",
+              "Fleisch",
+              "Fisch",
+              "Molkereiprodukte",
+            ],
+            name: ["Gurke", "Banane", "Schnitzel", "Lachs", "Käse"],
+          },
+        ],
+      ],
+    });
+
+    test({
+      func: f3,
+      data: [
+        {
+          a: 15,
+          b: 9,
+        },
+        ["+", "-", "*", "/"],
+      ],
+    });
+  </script>
+</html>

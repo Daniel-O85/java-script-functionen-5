@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main id="ausgabe"></main>
+    <script>
+      const aus = document.getElementById("ausgabe");
+
+      const f1 = (jason, array, text) => {
+        let sam = `<h3>${jason.titel}</h3>`;
+        for (let i of jason.details) {
+          sam += `<p>${i.vorname}</p>
+                      <p>${i.nachname}</p>
+                      <p>${i.alter}</p>`;
+        }
+        sam += `<p>${array[0].land}</p>
+                  <p>${array[0].hauptstadt}</p>`;
+
+        sam += `<p>${text}</p>`;
+
+        return sam;
+      };
+
+      const f2 = (array, jason1, jason2) => {
+        let sam = "";
+        for (let i of array[0].daten) {
+          sam += `<p>${i}</p>`;
+        }
+        sam += `<p>${array[0].titel}</p>
+                  <p><img src = "${array[0].bild}"></p>`;
+
+        sam += `<p>${jason1.zahl1} ${jason1.rechenweg[0]} ${jason1.zahl2} = ${
+          jason1.zahl1 + jason1.zahl2
+        }</p>
+        <p>
+        ${jason1.zahl1} ${jason1.rechenweg[1]} ${jason1.zahl2} = ${
+          jason1.zahl1 - jason1.zahl2
+        }</p>
+        <p>
+        ${jason1.zahl1} ${jason1.rechenweg[2]} ${jason1.zahl2} = ${
+          jason1.zahl1 * jason1.zahl2
+        }</p>
+        </p>
+        ${jason1.zahl1} ${jason1.rechenweg[3]} ${jason1.zahl2} = ${
+          jason1.zahl1 / jason1.zahl2
+        }</p>`;
+        sam += `<p><ol><li>${jason2.liste1[0]}</li></ol>
+                      <ol><li>${jason2.liste1[1]}</li></ol>
+                      <ol><li>${jason2.liste1[2]}</li></ol>
+                      <ol><li>${jason2.liste1[3]}</li></ol>
+              </p>
+              <p><ul><li>${jason2.liste2[0]}</li></ul>
+                      <ul><li>${jason2.liste2[1]}</li></ul>
+                      <ul><li>${jason2.liste2[2]}</li></ul>
+                      <ul><li>${jason2.liste2[3]}</li></ul>
+              </p>`;
+
+        return sam;
+      };
+
+      const f3 = (text1, zahl, text2) => {
+        return `<h3>${text1}</h3>
+          <p><span><u>${zahl}</u></span></p>
+          <p><span>${text2}</span></p>`;
+      };
+
+      function ausgabe(c) {
+        if (typeof c.foo === "function")
+          aus.innerHTML += c.foo(c.data[0], c.data[1], c.data[2]);
+      }
+
+      ausgabe({
+        foo: f1,
+        data: [
+          {
+            titel: "Kontakt",
+            details: [
+              {
+                vorname: "Peter",
+                nachname: "Pan",
+                alter: 16,
+              },
+            ],
+          },
+          [
+            {
+              land: "Deutschland",
+              hauptstadt: "Berlin",
+            },
+          ],
+          "Tri Tra Trulalala",
+        ],
+      });
+
+      ausgabe({
+        foo: f2,
+        data: [
+          [
+            {
+              daten: ["Hallo", "Du", "wie", "gehts ?"],
+              titel: "Es folgt ein Bild",
+              bild: "https://cdn-icons-png.flaticon.com/128/10039/10039369.png",
+            },
+          ],
+          {
+            zahl1: 12,
+            zahl2: 9,
+            rechenweg: ["+", "-", "*", "/"],
+          },
+          {
+            liste1: ["Apfel", "Birne", "Kiwi", "Mango"],
+            liste2: ["Gurke", "Tomate", "Knoblauch", "Zwiebel"],
+          },
+        ],
+      });
+
+      ausgabe({
+        foo: f3,
+        data: ["Trick", 17, "klappt immer"],
+      });
+    </script>
+  </body>
+</html>
